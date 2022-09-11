@@ -110,6 +110,32 @@ alias fuck='sudo $(history -p \!\!)'
 alias audiokill="sudo kill -9 `ps ax|grep 'coreaudio[a-z]' | awk '{print $1}'`"
 alias via='vim -- "$(ls -t | head -n 1)"'
 
+alias attach='tmux a -t'
+alias newtmux='tmux new -s'
+
+alias xlaunch='ssh -X'
+alias launch='ssh -Y'
+
+# welcome message
+echo "Active TMUX sessions"
+/opt/local/bin/tmux ls
+
+# sort alias
+alias sorted='sort | uniq -c | sort -nr'
+alias csv-awk='awk -F "\"*, \"*"'
+
+# grep colour
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# git commands
+alias rebase='git pull --rebase'
+alias names='git diff --name-only'
+alias push='git push'
+alias commit='git commit -am'
+alias add='git add'
+
 # Turn off all beeps
 unsetopt BEEP
 # Turn off autocomplete beeps
