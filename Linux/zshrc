@@ -118,7 +118,7 @@ alias launch='ssh -Y'
 
 # welcome message
 echo "Active TMUX sessions"
-/opt/local/bin/tmux ls
+/usr/bin/tmux ls
 
 # sort alias
 alias sorted='sort | uniq -c | sort -nr'
