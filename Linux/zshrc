@@ -144,3 +144,7 @@ unsetopt LIST_BEEP
 
 # I want vim to be my editor everywhere
 export EDITOR='vim'
+
+if [ -f '~/.zsh_aliases' ]; then
+  source ~/.zsh_aliases
+fi
