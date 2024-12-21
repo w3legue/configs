@@ -101,9 +101,17 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
+
+
 # Setup PATH the right way
-path+=('/opt/local/bin' '/opt/local/sbin/' '/usr/local/go/bin')
+path+=('/opt/local/bin' '/opt/local/sbin/' '/usr/local/go/bin' '/opt/hombrew/bin')
 export PATH
+
+# gcloud PATH
+export PATH="$HOME/repos/google-cloud-sdk/bin:$PATH"
+
+# homebrew
+export PATH="$(/opt/homebrew/bin/brew --prefix)/bin:$PATH"
 
 alias df='df -h'
 alias du='du -h'
@@ -148,3 +156,8 @@ export EDITOR='vim'
 if [ -f $HOME'/.zsh_aliases' ]; then
   source ~/.zsh_aliases
 fi
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/billlegue/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/billlegue/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/billlegue/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/billlegue/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
