@@ -168,3 +168,30 @@ export OP_FORMAT='json'
 
 # For zsh, add to ~/.zshrc:
 eval "$(direnv hook zsh)"
+
+# update dir env
+alias direnva='direnv allow'
+# Added by Windsurf
+export PATH="/Users/billlegue/.codeium/windsurf/bin:$PATH"
+
+source <(kubectl completion zsh 2>/dev/null)
+# Only source kubectl completion if KUBECONFIG points to an existing file
+#if [ ! -z "$KUBECONFIG" ] && [ -f "$KUBECONFIG" ]; then
+#  source <(kubectl completion zsh 2>/dev/null)
+#fi
+
+#Switch k8s namespace
+
+function kns() {
+  ctx=`kubectl config current-context`
+  ns=$1
+
+  # verify that the namespace exists
+  ns=`kubectl get namespace $1 --no-headers --output=go-template={{.metadata.name}} 2>/dev/null`
+  if [ -z "${ns}" ]; then
+    echo "Namespace (${1}) not found, using default"
+    ns="default"
+  fi
+
+  kubectl config set-context ${ctx} --namespace="${ns}"
+}
