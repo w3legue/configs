@@ -1,0 +1,41 @@
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gcm='git checkout main'
+alias gca='git add .'
+alias gs='git status'
+alias gsd='git diff'
+alias gpo='git push origin'
+
+alias jqc='jq -C'
+alias compare_jq="jq -s '{  role1: .[0].name,  role2: .[1].name,  unique_to_role1: (.[0].includedPermissions - .[1].includedPermissions),  unique_to_role2: (.[1].includedPermissions - .[0].includedPermissions),  role1_total: (.[0].includedPermissions | length),  role2_total: (.[1].includedPermissions | length),  shared: (.[0].includedPermissions - (.[0].includedPermissions - .[1].includedPermissions) | length)}'"
+alias gauth='gcloud auth login'
+alias gapp='gcloud auth application-default login'
+alias flat_json='/usr/local/bin/python3 ~/repos/tools/flatten_json.py'
+
+# gcloud
+alias gshell='gcloud beta interactive'
+
+# GCP things
+alias roles='cat ~/repos/tools/detailed_roles.json'
+
+# variables
+export ORG=871343292639
+
+alias entitlement='/usr/local/bin/python3 ~/repos/pam-request/entitlement_request.py'
+
+# terraform
+alias tinit='terraform init'
+alias tplan='terraform plan'
+alias tapply='terraform apply'
+# tfstate parsing
+alias tfstate_parse="jq -r '[.resources[].instances[].attributes]' | /usr/local/bin/python3 ~/repos/tools/flatten_json.py"
+
+alias t='talosctl'
+alias k='kubectl'
+alias kg='kubectl get'
+alias kgn='kubectl get namespaces'
+alias kga='kubectl get all'
+
+## Clean up unused replicasets
+
+alias kdelrs="kubectl delete replicaset $(kubectl get replicaset -o jsonpath='{ .items[?(@.spec.replicas==0)].metadata.name }')"
