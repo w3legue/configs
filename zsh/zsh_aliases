@@ -5,10 +5,12 @@ alias gca='git add .'
 alias gs='git status'
 alias gsd='git diff'
 alias gpo='git push origin'
+alias gmp='git checkout main && git pull --rebase'
 
 alias jqc='jq -C'
 alias compare_jq="jq -s '{  role1: .[0].name,  role2: .[1].name,  unique_to_role1: (.[0].includedPermissions - .[1].includedPermissions),  unique_to_role2: (.[1].includedPermissions - .[0].includedPermissions),  role1_total: (.[0].includedPermissions | length),  role2_total: (.[1].includedPermissions | length),  shared: (.[0].includedPermissions - (.[0].includedPermissions - .[1].includedPermissions) | length)}'"
 alias gauth='gcloud auth login'
+alias tauth='gcloud auth application-default login'
 alias gapp='gcloud auth application-default login'
 alias flat_json='/usr/local/bin/python3 ~/repos/tools/flatten_json.py'
 
@@ -22,6 +24,7 @@ alias roles='cat ~/repos/tools/detailed_roles.json'
 export ORG=871343292639
 
 alias entitlement='/usr/local/bin/python3 ~/repos/pam-request/entitlement_request.py'
+alias security-entitlement='/usr/local/bin/python3 ~/repos/pam-request/entitlement_request.py -o $ORG -e organizations/871343292639/locations/global/entitlements/security-org-admin-org'
 
 # terraform
 alias tinit='terraform init'
@@ -39,3 +42,13 @@ alias kga='kubectl get all'
 ## Clean up unused replicasets
 
 alias kdelrs="kubectl delete replicaset $(kubectl get replicaset -o jsonpath='{ .items[?(@.spec.replicas==0)].metadata.name }')"
+
+# gcp iam repo
+alias iam='/Users/$USER/.codeium/windsurf/bin/windsurf /Users/$USER/repo/gcp-iam'
+
+# gcp log search
+alias glog='python3 ~/repos/tools/gcp_log_search.py'
+
+
+# infosec vm
+alias infosec-ssh='gcloud compute ssh --zone "us-central1-f" "infosec-platform-dev-vm1" --project "infosec-platform-dev"'
