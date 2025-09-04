@@ -110,9 +110,6 @@ export PATH
 # gcloud PATH
 export PATH="$HOME/repos/google-cloud-sdk/bin:$PATH"
 
-# homebrew
-export PATH="$(/opt/homebrew/bin/brew --prefix)/bin:$PATH"
-
 alias df='df -h'
 alias du='du -h'
 alias fuck='sudo $(history -p \!\!)'
@@ -124,10 +121,6 @@ alias newtmux='tmux new -s'
 
 alias xlaunch='ssh -X'
 alias launch='ssh -Y'
-
-# welcome message
-echo "Active TMUX sessions"
-/opt/homebrew/bin/tmux ls
 
 # sort alias
 alias sorted='sort | uniq -c | sort -nr'
@@ -183,21 +176,27 @@ export PATH
 
 # OS-specific configurations
 if [[ "$(uname)" == "Darwin" ]]; then
+  # homebrew
+  export PATH="$(/opt/homebrew/bin/brew --prefix)/bin:$PATH"
   # Mac-specific configurations
   path+=('/opt/homebrew/bin')
   export PATH
-  
+
   # gcloud PATH
   export PATH="$HOME/repos/google-cloud-sdk/bin:$PATH"
-  
+
   # homebrew
   export PATH="$(/opt/homebrew/bin/brew --prefix)/bin:$PATH"
-  
+
   # Mac-specific aliases
   alias audiokill="sudo kill -9 `ps ax|grep 'coreaudio[a-z]' | awk '{print $1}'`"
+
+
 else
   # Linux-specific configurations (if any)
   # Add Linux-specific paths or configurations here
+  #exprt PATH=
+
 fi
 
 # Common aliases for both systems
@@ -246,32 +245,34 @@ if [ -f $HOME'/.zsh_aliases' ]; then
   source ~/.zsh_aliases
 fi
 
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
 # OS-specific additional configurations
 if [[ "$(uname)" == "Darwin" ]]; then
   # The next line updates PATH for the Google Cloud SDK.
-  if [ -f "$HOME/Downloads/google-cloud-sdk/path.zsh.inc" ]; then 
+  if [ -f "$HOME/Downloads/google-cloud-sdk/path.zsh.inc" ]; then
     source "$HOME/Downloads/google-cloud-sdk/path.zsh.inc"
   fi
-  
+
   # The next line enables shell command completion for gcloud.
-  if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then 
+  if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then
     source "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc"
   fi
-  
+
   # Auto Complete for 1pass CLI
   if command -v op >/dev/null 2>&1; then
     eval "$(op completion zsh 2>/dev/null)"
     compdef _op op 2>/dev/null
     export OP_FORMAT='json'
   fi
-  
+
   # For zsh, add to ~/.zshrc:
   if command -v direnv >/dev/null 2>&1; then
     eval "$(direnv hook zsh)"
     # update dir env
     alias direnva='direnv allow'
   fi
-  
+
   # Added by Windsurf
   export PATH="$HOME/.codeium/windsurf/bin:$PATH"
 fi
@@ -299,16 +300,16 @@ fi
 
 #Switch k8s namespace
 
-function kns() {
-  ctx=`kubectl config current-context`
-  ns=$1
-
-  # verify that the namespace exists
-  ns=`kubectl get namespace $1 --no-headers --output=go-template={{.metadata.name}} 2>/dev/null`
-  if [ -z "${ns}" ]; then
-    echo "Namespace (${1}) not found, using default"
-    ns="default"
-  fi
-
-  kubectl config set-context ${ctx} --namespace="${ns}"
-}
+# function kns() {
+#   ctx=`kubectl config current-context`
+#   ns=$1
+# 
+#   # verify that the namespace exists
+#   ns=`kubectl get namespace $1 --no-headers --output=go-template={{.metadata.name}} 2>/dev/null`
+#   if [ -z "${ns}" ]; then
+#     echo "Namespace (${1}) not found, using default"
+#     ns="default"
+#   fi
+# 
+#   kubectl config set-context ${ctx} --namespace="${ns}"
+# }
